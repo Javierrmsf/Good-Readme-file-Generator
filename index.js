@@ -2,43 +2,59 @@ const inquirer = require('inquirer');
 
 const fs = require('fs');
 
-const { title } = require('process');
-
-const generateMarkDown = ({ title, description, installationi, usagei, contributioni, testi, badge}) =>
+const util = require ('util');
 
 
-`# ${title}
+
+function generateMarkDown (data) { 
+
+    let badgeimage = ""
+    if (license = 'Apache 2.0 License'){
+        badgeimage = '![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)'
+    }
+    if (license = 'Boost Software License 1.0' ){
+        badgeimage ='![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)'
+
+    }
+    if (license = 'BSD 3-Clause License'){
+        badgeimage = '![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)'
+    }
+    
+    return`# ${data.title}
  
  ## Description
 
- ${badge}
+ ${badgeimage}
 
-${description}
+${data.description}
 
 ## Installation
 
-${installationi}
+${data.installationi}
 
 ## Usage 
 
-${usagei}
+${data.usagei}
 
 ## Contribution
 
-${contributioni}
+${data.contributioni}
 
 ## Test 
 
-${testi}
+${data.testi}
 
 ## Questions
 
 
   
-   `;
+   `;}
 
+   const prqu = () =>
 inquirer
-  .prompt([
+
+
+ .prompt([
     {
       type: 'input',
       name: 'title',
@@ -78,30 +94,30 @@ inquirer
     
 
   ])
+ 
   
-  .then((answers) => {
-    const readmecontent = generateMarkDown(answers);
-    const readmecontent2 = renderLicenseBadge(answers);
-  
+//const init = () => {
+  //prqu ()
 
-    fs.writeFile('README.md', readmecontent, readmecontent2, (err) =>
-      err ? console.log(err) : console.log('README FILE CREATED')
-    );
-  });
-  function renderLicenseBadge(license) {
-      let badge = ""
-      if (license = 'Apache 2.0 License'){
-          badge = '![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)'
-      }
-      if (license = 'Boost Software License 1.0' ){
-          badge ='![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)'
+  //.then((data) => {
+    
 
-      }
-      if (license = 'BSD 3-Clause License'){
-          badge = '![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)'
-      }
-  }
+   // fs.writeFile('README.md', generateMarkDown(data),);
+  //});
+//} 
+
+//init ()
+
+ 
+
+prqu()
+.then((data) => createfile('generatedREADME.md', generateMarkDown(data)))
 
 
-  
+    .then(() => console.log('README file made succesfully '))
 
+
+    .catch((err) => console.error(err));
+
+    
+const createfile = util.promisify(fs.writeFile);
