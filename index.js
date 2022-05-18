@@ -116,11 +116,17 @@ function generateMarkDown (data) {
  
 
 - [Description](#description)
+
 - [Installation](#installation)
+
 - [Usage](#usage)
+
 - [Contribution](#contribution)
+
 - [Test](#test)
+
 - [Questions](#questions)
+
 - [${licensesection}](#${licensesection})
 
 
@@ -225,17 +231,6 @@ inquirer
   ])
  
   
-//const init = () => {
-  //prqu ()
-
-  //.then((data) => {
-    
-
-   // fs.writeFile('README.md', generateMarkDown(data),);
-  //});
-//} 
-
-///init ()
 
  
 
