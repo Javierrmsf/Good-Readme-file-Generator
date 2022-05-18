@@ -106,12 +106,12 @@ inquirer
   //});
 //} 
 
-//init ()
+///init ()
 
  
 
 prqu()
-.then((data) => createfile('generatedREADME.md', generateMarkDown(data)))
+.then((data) => createfile('additionalREADME.md', generateMarkDown(data)))
 
 
     .then(() => console.log('README file made succesfully '))
