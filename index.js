@@ -9,42 +9,161 @@ const util = require ('util');
 function generateMarkDown (data) { 
 
     let badgeimage = ""
+    let licenselink = ""
+    let licensesection = ""
+    
     if (license = 'Apache 2.0 License'){
         badgeimage = '![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)'
+        licenselink = 'https://opensource.org/licenses/Apache-2.0'
+        licensesection = 'license'
+        
     }
     if (license = 'Boost Software License 1.0' ){
         badgeimage ='![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)'
+        licenselink = 'https://www.boost.org/LICENSE_1_0.txt'
+        licensesection = 'license'
 
     }
     if (license = 'BSD 3-Clause License'){
         badgeimage = '![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)'
+        licenselink = 'https://opensource.org/licenses/BSD-3-Clause'
+        licensesection ='license'
+    }
+
+    if (license = 'BSD 2-Clause License'){
+        badgeimage = '![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)'
+        licenselink = 'https://opensource.org/licenses/BSD-2-Clause'
+        licensesection ='license'
+    }
+
+    if(license = 'CC0'){
+        badgeimage ='![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png)'
+        licenselink = 'http://creativecommons.org/publicdomain/zero/1.0/'
+        licensesection ='license'
+    }
+
+    if(license = 'CC0 1.0'){
+        badgeimage ='![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)'
+        licenselink = 'http://creativecommons.org/publicdomain/zero/1.0/'
+        licensesection ='license'
     }
     
+    if(license = 'Attribution 4.0 International'){
+        badgeimage ='![License: CC BY 4.0](https://licensebuttons.net/l/by/4.0/80x15.png)'
+        licenselink = 'https://creativecommons.org/licenses/by/4.0/'
+        licensesection = 'license'
+    }
+
+    if(license = 'CC BY 4.0'){
+        badgeimage ='![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)'
+        licenselink = 'https://creativecommons.org/licenses/by/4.0/'
+        licensesection ='license'
+    }
+
+    if(license = 'Attribution-ShareAlike 4.0 International'){
+        badgeimage ='![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)'
+        licenselink = 'https://creativecommons.org/licenses/by-sa/4.0/'
+        licensesection ='license'
+    }
+
+    if(license = 'Eclipse Public License 1.0'){
+        badgeimage ='![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)'
+        licenselink = 'https://opensource.org/licenses/EPL-1.0'
+        licensesection = 'license'
+    }
+
+    if(license = 'GNU GPL v3'){
+        badgeimage ='![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)'
+        licenselink = 'https://www.gnu.org/licenses/gpl-3.0'
+        licensesection = 'license'
+    }
+
+    if(license = 'IBM Public License Version 1.0'){
+        badgeimage ='![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)'
+        licenselink = 'https://opensource.org/licenses/IPL-1.0'
+        licensesection = 'license'
+    }
+
+    if(license = 'The MIT License'){
+        badgeimage ='![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)'
+        licenselink = 'https://opensource.org/licenses/MIT'
+        licensesection = 'license'
+    }
+
+    if(license = 'Mozilla Public License 2.0'){
+        badgeimage ='![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)'
+        licenselink = 'https://opensource.org/licenses/MPL-2.0'
+        licensesection ='license'
+    }
+
+    if(license = 'Attribution License (BY)'){
+        badgeimage ='![License: Open Data Commons Attribution](https://img.shields.io/badge/License-ODC_BY-brightgreen.svg)'
+        licenselink = 'https://opendatacommons.org/licenses/by/'
+        licensesection = 'license'
+    }
+
+    if(license = 'No License'){
+        badgeimage =''
+        licenselink = ''
+        licensesection = ''
+    }
+
+
+    
+    
     return`# ${data.title}
+    ${badgeimage}
  
- ## Description
 
- ${badgeimage}
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Test](#test)
+- [Questions](#questions)
+- [${licensesection}](#${licensesection})
 
+
+## Description
 ${data.description}
+
+
+
+
 
 ## Installation
 
 ${data.installationi}
 
+
+
+
 ## Usage 
 
 ${data.usagei}
 
+
+
+
 ## Contribution
 
 ${data.contributioni}
+
+
+
+
 
 ## Test 
 
 ${data.testi}
 
 ## Questions
+My Github account is: ${data.account}
+If you have any questions please contact me at:${data.email}
+
+##${licensesection}
+
+${licenselink}
 
 
   
@@ -89,8 +208,18 @@ inquirer
     type: 'list',
     message: 'Please select a license',
     name: 'license',
-    choices: ['Apache 2.0 License', 'Boost Software License 1.0', 'BSD 3-Clause License'],
+    choices: [ 'No License', 'Apache 2.0 License', 'Boost Software License 1.0', 'BSD 3-Clause License', 'BSD 2-Clause License', 'CC0','CC0 1.0','Attribution 4.0 International', 'CC BY 4.0', 'Attribution-ShareAlike 4.0 International', 'Eclipse Public License 1.0', 'GNU GPL v3', 'IBM Public License Version 1.0', 'The MIT License', 'Mozilla Public License 2.0', 'Attribution License (BY)'],
     },
+    {
+        type: 'input',
+        name: 'account',
+        message: 'Please write your github account',
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: 'please write your email',
+      },
     
 
   ])
